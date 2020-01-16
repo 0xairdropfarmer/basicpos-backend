@@ -11,8 +11,7 @@
     "server-prod": "node index.js",
     "server": "nodemon index.js",
     "start": "node index.js",
-    "start:dev": "concurrently --kill-others  \"npm run client\" \"npm run server\" ",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "start:dev": "concurrently --kill-others  \"npm run client\" \"npm run server\" "
   },
   "author": "",
   "license": "ISC",
