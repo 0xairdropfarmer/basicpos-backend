@@ -145,6 +145,9 @@ router.put("/profile", async (req, res) => {
     res.json({ result: "error", message: err.errmsg });
   }
 });
+router.get("/test", async (req, res) => {
+  res.send('Hello Heroku')
+});
 router.get("/profile/id/:id", async (req, res) => {
   let doc = await Users.findOne({ _id: req.params.id });
 
