@@ -55,7 +55,7 @@ router.post("/register", async (req, res) => {
       subject: `Account activation link`,
       html: `
             <h1>Please use the following link to activate your account</h1>
-            <p><a href="localhost:8080/activation/${token}">Activation link</p>
+            <p><a href="${process.env.HEROKU_APP_NAME}.herokuapp.com/activation/${token}">Activation link</p>
             <hr />
             <p>This email may contain sensetive information</p>
             <p>and link will  expired in 365 days</p>
@@ -73,7 +73,7 @@ router.post("/register", async (req, res) => {
         });
       })
       .catch(err => {
-        console.log("SIGNUP EMAIL SENT ERROR", err);
+        console.log("SIGNUP EMAIL SENT ERROR", err.message);
         return res.json({
           result: "error",
           message: err.message
