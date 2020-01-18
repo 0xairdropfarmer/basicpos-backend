@@ -55,7 +55,7 @@ router.post("/register", async (req, res) => {
       subject: `Account activation link`,
       html: `
             <h1>Please use the following link to activate your account</h1>
-            <p><a href="${process.env.HEROKU_APP_NAME}.herokuapp.com/activation/${token}">Activation link</p>
+            <p><a href="${process.env.HEROKU_APP_NAME}.herokuapp.com/api/v1/activation/${token}">Activation link</p>
             <hr />
             <p>This email may contain sensetive information</p>
             <p>and link will  expired in 365 days</p>
@@ -93,7 +93,7 @@ router.get("/activation/:token", async (req, res) => {
     ) {
       if (err) {
         console.log("JWT VERIFY IN ACCOUNT ACTIVATION ERROR", err);
-        return res.redirect("http://localhost:3000/login/error");
+        return res.redirect(process.env.Frontend_URL + "login/error");
       }
     });
     let updatedFields = {
@@ -104,7 +104,7 @@ router.get("/activation/:token", async (req, res) => {
       { activated_token: token },
       updatedFields
     );
-    return res.redirect("http://localhost:3000/login/success");
+    return res.redirect(process.env.Frontend_URL + "login/success");
   }
 });
 
