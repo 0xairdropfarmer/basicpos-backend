@@ -73,7 +73,7 @@ router.post("/register", async (req, res) => {
         });
       })
       .catch(err => {
-        // console.log('SIGNUP EMAIL SENT ERROR', err)
+        console.log("SIGNUP EMAIL SENT ERROR", err);
         return res.json({
           result: "error",
           message: err.message
@@ -146,7 +146,7 @@ router.put("/profile", async (req, res) => {
   }
 });
 router.get("/test", async (req, res) => {
-  res.send('Hello Heroku')
+  res.send("Hello Heroku");
 });
 router.get("/profile/id/:id", async (req, res) => {
   let doc = await Users.findOne({ _id: req.params.id });
