@@ -9,7 +9,7 @@ require("./db");
 const Users = require("./models/user_schema");
 
 var allowedOrigins = ['http://localhost:3000',
-                      'https://basicpos.netlify.com'];
+                      'https://basicpos.netlify.app'];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
