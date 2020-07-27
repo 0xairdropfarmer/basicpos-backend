@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 app.use(express.static(__dirname + "/uploaded"));
+app.use(express.json());
 require("./db");
 const Users = require("./models/user_schema");
 
