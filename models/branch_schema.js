@@ -4,6 +4,9 @@ const schema = mongoose.Schema({
     address: String,
     tel: String,
     frontimage: String,
+    pos_machines: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'pos_machines' }
+    ],
     created: { type: Date, default: Date.now },
 });
 
