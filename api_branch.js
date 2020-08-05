@@ -69,7 +69,6 @@ router.post("/branch", async (req, res) => {
 
       let pos_arr = fields.pos_machines.split(',')
       const pos = await posmachine.find().where('_id').in(pos_arr).exec();
-      console.log(newBranch)
       newBranch.pos_machines = pos
       await newBranch.save()
       res.json({ result: "success", message: "Create Brach data successfully" });
@@ -102,8 +101,12 @@ router.put("/branch", async (req, res) => {
     var form = new formidable.IncomingForm();
 
     form.parse(req, async (err, fields, files) => {
-      let doc = await branch.findByIdAndUpdate({ _id: fields.id }, fields);
-      await uploadImage(files, doc);
+      let updateBranch = await branch.findByIdAndUpdate({ _id: fields.id }, { name: fields.name, tel: fields.tel, address: fields.address });
+      let pos_arr = fields.pos_machines.split(',')
+      const pos = await posmachine.find().where('_id').in(pos_arr).exec();
+      updateBranch.pos_machines = pos
+      await updateBranch.save()
+      await uploadImage(files, updateBranch);
       res.json({ result: "success", message: "Update Brach data successfully" });
     });
   } catch (err) {
