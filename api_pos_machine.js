@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+var faker = require('faker');
 const POS_Machine = require("./models/pos_machine_schema");
 const jwt = require("./jwt");
 router.get("/pos_machine", jwt.verify, async (req, res) => {
@@ -28,6 +29,8 @@ router.get("/pos_machine/:id", async (req, res) => {
 });
 router.post("/pos_machine", async (req, res) => {
   try {
+
+
     let doc = await POS_Machine.create(req.body);
 
     res.json({
