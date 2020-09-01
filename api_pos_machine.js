@@ -27,6 +27,7 @@ router.get("/pos_machine/:id", async (req, res) => {
     res.json({ result: "error", message: err.msg });
   }
 });
+
 router.post("/pos_machine", async (req, res) => {
   try {
 
@@ -56,6 +57,33 @@ router.put("/pos_machine", async (req, res) => {
     res.json({ result: "error", message: err.msg });
   }
 });
+router.put("/pos_machine/inline_update", async (req, res) => {
+  let id = req.body._id
+  let column = req.body.column
+  let value = req.body.value
+  // console.log(column)
+  try {
+    let doc = await POS_Machine.update(
+      { _id: id }, { $set: { [column]: value } }, function (err, result) {
+
+        if (err) {
+          res.json({ result: "error", message: err.msg });
+        }
+        else {
+          res.json({
+            result: result,
+            message: "Update POS data Successfully",
+          });
+        }
+
+      }
+    );
+
+
+  } catch (err) {
+    res.json({ result: "error", message: err.msg });
+  }
+});
 router.delete("/pos_machine/:id", async (req, res) => {
   // console.log(req.params.id);
   try {
@@ -68,5 +96,25 @@ router.delete("/pos_machine/:id", async (req, res) => {
   } catch (err) {
     res.json({ result: "error", message: err.msg });
   }
+});
+router.delete("/pos_machine/bulk_delete/:id", async (req, res) => {
+  let id = req.params.id.split(",");
+  console.log(id)
+  // try {
+  let response = await POS_Machine.deleteMany({ _id: { $in: id } }, function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json({
+        result: "success",
+        message: "Bulk Delete Successfully",
+        data: data,
+      });
+    }
+  });
+
+  // } catch (err) {
+  //   res.json({ result: "error", message: err.msg });
+  // }
 });
 module.exports = router;
